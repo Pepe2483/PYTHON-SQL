@@ -1,0 +1,51 @@
+import pandas as pd
+from sqlalchemy import create_engine, text
+
+# ===============================
+# CONEXIÓN A SQL SERVER
+# ===============================
+engine = create_engine(
+    "mssql+pyodbc://sa:123456789@DESKTOP-3I6O45D/CLIMA?driver=ODBC+Driver+17+for+SQL+Server"
+)
+
+# ===============================
+# RUTA Y HOJA
+# ===============================
+ruta_excel = r"D:\Dropbox\JOSE-DP-SHEILA\EVALUACION DE ESTABLO POR TABLAS\TEMPERATURAS Y HUMEDAD.xlsx"
+hoja = "TEMPERATURA"
+
+# ===============================
+# LEER EXCEL
+# ===============================
+df = pd.read_excel(ruta_excel, sheet_name=hoja)
+
+# ===============================
+# NORMALIZAR NOMBRES (EXCEL → SQL)
+# ===============================
+df = df.rename(columns={
+    "Source.Name": "Source_Name",
+    "TEM MAX": "TEM_MAX",
+    "TEM MIN": "TEM_MIN",
+    "PRECIPITACIÓN": "PRECIPITACION",
+    "Índice": "INDICE",
+    "ITH MAX": "ITH_MAX",
+    "ITHMIN": "ITH_MIN"
+})
+
+# ===============================
+# BORRAR TABLA (SIN BORRAR ESTRUCTURA)
+# ===============================
+with engine.begin() as conn:
+    conn.execute(text("TRUNCATE TABLE Temperatura_Humedad"))
+
+# ===============================
+# INSERTAR TODO DE NUEVO
+# ===============================
+df.to_sql(
+    "Temperatura_Humedad",
+    engine,
+    if_exists="append",
+    index=False
+)
+
+print("✅ Tabla Temperatura_Humedad recargada completamente.")
