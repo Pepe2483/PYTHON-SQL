@@ -6,6 +6,8 @@ BEGIN
 END
 GO
 
+# NOTA: Los GO al inicio y al final no se consideran en sql de server de mi nueva pc
+
 # 1) PARTOS
 
 USE EVALUACION_ESTABLOS;
@@ -237,7 +239,7 @@ BEGIN
     BirDiag           NVARCHAR(50) NULL,
 
     Source_FileDate DATE         NULL,
-    Source-FileTime TIME(3)      NULL
+    Source_FileTime TIME(3)      NULL
   );
 END
 GO
@@ -409,10 +411,10 @@ BEGIN
     HSAnimalCountLeft@1P    FLOAT NULL,
 
     Source_FileDate DATE    NULL,
-    Source-FileTime TIME(3) NULL
+    Source_FileTime TIME(3) NULL
   );
 END
-GO
+
 
 
    # 11) GENERALES_ESTABLOS
