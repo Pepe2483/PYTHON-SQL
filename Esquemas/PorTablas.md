@@ -40,5 +40,18 @@ BEGIN
         ON raw.ABORTOS (Source_Name, RowNum);
     END
 END
-GO
 
+
+
+USE EVALUACION_ESTABLOS;
+
+-- 1) Borrar el índice actual
+DROP INDEX IF EXISTS IX_raw_ABORTOS_Source_Row ON raw.ABORTOS;
+
+-- 2) Reducir tamaños de metadatos (solo esto)
+ALTER TABLE raw.ABORTOS ALTER COLUMN Source_Name NVARCHAR(260) NULL;
+ALTER TABLE raw.ABORTOS ALTER COLUMN DairyName   NVARCHAR(60)  NULL;
+
+-- 3) Recrear índice seguro
+CREATE INDEX IX_raw_ABORTOS_Source_Row
+ON raw.ABORTOS (Source_Name, RowNum);
