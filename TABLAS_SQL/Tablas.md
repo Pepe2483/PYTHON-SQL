@@ -1,3 +1,4 @@
+# Crear tablas en Sql sin espacion ni putnos en los nombre
 # PARTOS
 
 USE EVALUACION_ESTABLOS;
