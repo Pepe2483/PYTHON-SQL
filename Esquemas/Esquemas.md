@@ -1,5 +1,6 @@
 
 #CREAR ESQUEMAS
+
 use EVALUACION_ESTABLOS
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'raw')
@@ -19,7 +20,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'dw')
 
     #ver si existen esquemas
     
-    SELECT name
+SELECT name
 FROM sys.schemas
 WHERE name IN ('dbo','raw','stg','ref','etl','dw')
 ORDER BY name;
