@@ -1,1 +1,16 @@
+use EVALUACION_ESTABLOS
 
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'raw')
+    EXEC('CREATE SCHEMA raw AUTHORIZATION dbo');
+
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'stg')
+    EXEC('CREATE SCHEMA stg AUTHORIZATION dbo');
+
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'ref')
+    EXEC('CREATE SCHEMA ref AUTHORIZATION dbo');
+
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'etl')
+    EXEC('CREATE SCHEMA etl AUTHORIZATION dbo');
+
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'dw')
+    EXEC('CREATE SCHEMA dw AUTHORIZATION dbo');
