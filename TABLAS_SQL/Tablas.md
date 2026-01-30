@@ -8,8 +8,9 @@ GO
 IF OBJECT_ID('dbo.PARTOS','U') IS NULL
 BEGIN
   CREATE TABLE dbo.PARTOS (
+  
     OID_PARTO          INT IDENTITY(1,1) PRIMARY KEY,
-    [Source_Name]      VARCHAR(80) NULL,
+    Source_Name      VARCHAR(80) NULL,
     DairyName          VARCHAR(50) NULL,
     TODAY              DATE        NULL,
     cow                BIGINT      NULL,
@@ -45,8 +46,9 @@ GO
 IF OBJECT_ID('dbo.ABORTOS','U') IS NULL
 BEGIN
   CREATE TABLE dbo.ABORTOS (
+  
     OID_ABORTO         INT IDENTITY(1,1) PRIMARY KEY,
-    [Source_Name]      VARCHAR(80) NULL,
+    Source_Name      VARCHAR(80) NULL,
     DairyName          VARCHAR(50) NULL,
     TODAY              DATE        NULL,
     COW                BIGINT      NULL,
@@ -79,11 +81,15 @@ END
 GO
 
 # SECADO
+
+
 IF OBJECT_ID('dbo.SECADO','U') IS NULL
 BEGIN
   CREATE TABLE dbo.SECADO (
+
+  
     OID_SECA           INT IDENTITY(1,1) PRIMARY KEY,
-    [Source_Name]      VARCHAR(80) NULL,
+    Source_Name      VARCHAR(80) NULL,
     DairyName          VARCHAR(50) NULL,
     TODAY              DATE        NULL,
     cow                BIGINT      NULL,
@@ -122,8 +128,9 @@ GO
 IF OBJECT_ID('dbo.SECADO','U') IS NULL
 BEGIN
   CREATE TABLE dbo.SECADO (
+  
     OID_SECA         BIGINT IDENTITY(1,1) PRIMARY KEY,
-    [Source_Name]    VARCHAR(255) NULL,
+    Source_Name    VARCHAR(255) NULL,
 
     DairyName        VARCHAR(50)  NULL,
     TODAY            DATE         NULL,
@@ -163,8 +170,9 @@ GO
 IF OBJECT_ID('dbo.SACAS','U') IS NULL
 BEGIN
   CREATE TABLE dbo.SACAS (
+  
     OID_SACA         BIGINT IDENTITY(1,1) PRIMARY KEY,
-    [Source_Name]    VARCHAR(255) NULL,
+    Source_Name    VARCHAR(255) NULL,
 
     DairyName        VARCHAR(50)  NULL,
     TODAY            DATE         NULL,
@@ -188,8 +196,8 @@ BEGIN
     VETCOM2          NVARCHAR(50)  NULL,
     GP               NVARCHAR(50)  NULL,
 
-    [Source_FileDate] DATE         NULL,
-    [Source_FileTime] TIME(3)      NULL
+    Source_FileDate DATE         NULL,
+    Source_FileTime TIME(3)      NULL
   );
 END
 GO
@@ -200,8 +208,9 @@ GO
 IF OBJECT_ID('dbo.PROGENIE','U') IS NULL
 BEGIN
   CREATE TABLE dbo.PROGENIE (
+  
     OID_PROGENIE      BIGINT IDENTITY(1,1) PRIMARY KEY,
-    [Source_Name]     VARCHAR(255) NULL,
+    Source_Name     VARCHAR(255) NULL,
 
     DairyName         VARCHAR(50)  NULL,
     TODAY             DATE         NULL,
@@ -218,11 +227,360 @@ BEGIN
     OffsSex           NVARCHAR(10)  NULL,
     OffsValue         DECIMAL(10,2) NULL,
 
-    [Source_FileDate] DATE         NULL,
-    [Source_FileTime] TIME(3)      NULL
+    Source_FileDate DATE         NULL,
+    Source_FileTime TIME(3)      NULL
   );
 END
 GO
+
+# NACIMIENTOS
+USE EVALUACION_ESTABLOS;
+GO
+
+IF OBJECT_ID('dbo.NACIMIENTOS','U') IS NULL
+BEGIN
+  CREATE TABLE dbo.NACIMIENTOS (
+  
+    OID_NACIMIENTO    BIGINT IDENTITY(1,1) PRIMARY KEY,
+    Source_Name     VARCHAR(255) NULL,
+
+    DairyName         VARCHAR(50)  NULL,
+    TODAY             DATE         NULL,
+    cow               VARCHAR(50)  NULL,
+    stat              NVARCHAR(50) NULL,
+    bd                DATE         NULL,
+    typ               NVARCHAR(50) NULL,
+
+    BirVAIdCode       NVARCHAR(20) NULL,
+    BirNumLact        INT          NULL,
+    BirCtrlCode       NVARCHAR(50) NULL,
+    BirOffC           NVARCHAR(50) NULL,
+    BirCom            NVARCHAR(50) NULL,
+    BirCom2           NVARCHAR(50) NULL,
+    BirCount          INT          NULL,
+    BirCntLf          INT          NULL,
+    BirCost           FLOAT        NULL,
+    BirRevCode        NVARCHAR(50) NULL,
+    BirDim            INT          NULL,
+    BirAge            DECIMAL(10,2) NULL,
+    BirTech           NVARCHAR(50) NULL,
+    BirClvEase        NVARCHAR(50) NULL,
+    BirClvEaseCod     NVARCHAR(20) NULL,
+    BirDat            DATE         NULL,
+    BirTime           TIME(0)      NULL,
+    BirSidEffL2       NVARCHAR(50) NULL,
+    BirDiag           NVARCHAR(50) NULL,
+
+    Source_FileDate DATE         NULL,
+    Source-FileTime TIME(3)      NULL
+  );
+END
+GO
+# ENFERMEDADES
+
+USE EVALUACION_ESTABLOS;
+GO
+
+IF OBJECT_ID('dbo.ENFERMEDADES','U') IS NULL
+BEGIN
+  CREATE TABLE dbo.ENFERMEDADES (
+  
+    OID_ENFERMEDAD    BIGINT IDENTITY(1,1) PRIMARY KEY,
+    Source_Name     VARCHAR(255) NULL,
+
+    DairyName         VARCHAR(50)  NULL,
+    TODAY             DATE         NULL,
+    cow               VARCHAR(50)  NULL,
+    stat              NVARCHAR(50) NULL,
+    BD                DATE         NULL,
+    TYP               NVARCHAR(50) NULL,
+
+    VetVAIdCode       NVARCHAR(20) NULL,
+    lc                INT          NULL,
+    VetNumLact        INT          NULL,
+    VetAmount         FLOAT        NULL,
+    VetReason         NVARCHAR(50) NULL,
+    VetCtrlCode       NVARCHAR(50) NULL,
+    VetCount3Day      INT          NULL,
+    VetActionType     NVARCHAR(50) NULL,
+    VetOffC           NVARCHAR(50) NULL,
+    VetCom            NVARCHAR(50) NULL,
+    VetCom2           NVARCHAR(50) NULL,
+    VetCount          INT          NULL,
+    VetCntLf          INT          NULL,
+    VetCost           FLOAT        NULL,
+    VetDosageUnit     NVARCHAR(50) NULL,
+    VetRecommDose     NVARCHAR(50) NULL,
+    VetDim            INT          NULL,
+    VetAge            DECIMAL(10,2) NULL,
+    VetTech           NVARCHAR(50) NULL,
+    VetDat            DATE         NULL,
+    VetFrequency      NVARCHAR(50) NULL,
+    VetTime           TIME(0)      NULL,
+    Vet2Do            INT          NULL,
+    VetMetCode        NVARCHAR(50) NULL,
+    VetName           NVARCHAR(100) NULL,
+    VetFullName       NVARCHAR(100) NULL,
+    VetXCode          NVARCHAR(50) NULL,
+    VetAct2hA         NVARCHAR(50) NULL,
+    VetDiag           NVARCHAR(50) NULL,
+    FECHAPARTO        DATE         NULL,
+
+    Source_FileDate DATE         NULL,
+    Source_FileTime TIME(3)      NULL
+  );
+END
+GO
+
+#/* =========================
+   1) TEST_DE_PRENEZ
+   ========================= */
+
+USE EVALUACION_ESTABLOS;
+GO
+
+
+IF OBJECT_ID('dbo.TEST_DE_PRENEZ','U') IS NULL
+BEGIN
+  CREATE TABLE dbo.TEST_DE_PRENEZ (
+    OID_TEST_PRENEZ   BIGINT IDENTITY(1,1) PRIMARY KEY,
+    [Source.Name]     VARCHAR(255) NULL,
+
+    DairyName         VARCHAR(50)  NULL,
+    [FECHA DE ARCHIVO] DATE        NULL,
+    COW               VARCHAR(50)  NULL,
+    [LC ACTUAL]       INT          NULL,
+    [DIM ACTUAL]      INT          NULL,
+    [STAT ACTUAL]     NVARCHAR(50) NULL,
+    RAZA              NVARCHAR(10) NULL,
+    SEXO              NVARCHAR(10) NULL,
+
+    PrgVAIdCode       NVARCHAR(20) NULL,
+    PrgNumLact        INT          NULL,
+    PrgCtrlCode       NVARCHAR(50) NULL,
+    PrgOffC           NVARCHAR(50) NULL,
+    PrgCom            NVARCHAR(50) NULL,
+    PrgCom2           NVARCHAR(50) NULL,
+    PrgCount          INT          NULL,
+    PrgCntLf          INT          NULL,
+    PrgCost           FLOAT        NULL,
+    PrgRevCode        NVARCHAR(50) NULL,
+    PrgDim            INT          NULL,
+    PrgAge            DECIMAL(10,2) NULL,
+    PrgTech           NVARCHAR(50) NULL,
+    PrgDat            DATE         NULL,
+    PrgTime           TIME(0)      NULL,
+    Prg2Do            INT          NULL,
+    PrgSidEffL2       NVARCHAR(50) NULL,
+    PrgDiag           NVARCHAR(50) NULL,
+    [FECHA DE PARTO]  DATE         NULL,
+
+    [Source.FileDate] DATE         NULL,
+    [Source.FileTime] TIME(3)      NULL
+  );
+END
+GO
+
+/* =========================
+   2) GENERALES_RECRIA
+   ========================= */
+IF OBJECT_ID('dbo.GENERALES_RECRIA','U') IS NULL
+BEGIN
+  CREATE TABLE dbo.GENERALES_RECRIA (
+    OID_GENERAL_RECRIA BIGINT IDENTITY(1,1) PRIMARY KEY,
+    [Source.Name]      VARCHAR(255) NULL,
+
+    DairyName          VARCHAR(50)  NULL,
+    [today()]          DATE         NULL,
+    HSDate             DATE         NULL,
+
+    [HSAnimalCountTotal.0@YF] FLOAT NULL,
+    [HSCountAnimElig.0@Y]     FLOAT NULL,
+    [HSInsemCountTotal@Y]     FLOAT NULL,
+    [HSInsemCountSuccess@Y]   FLOAT NULL,
+    [HSInsemRateCycle@Y]      FLOAT NULL,
+    [HSPregRateCycle@Y]       FLOAT NULL,
+    [HSCountPreg@Y]           FLOAT NULL,
+    [HSAnimalCountLeft@yF]    FLOAT NULL,
+
+    [Source.FileDate] DATE    NULL,
+    [Source.FileTime] TIME(3) NULL
+  );
+END
+GO
+
+/* =========================
+   3) GENERALES_VACAS
+   ========================= */
+IF OBJECT_ID('dbo.GENERALES_VACAS','U') IS NULL
+BEGIN
+  CREATE TABLE dbo.GENERALES_VACAS (
+    OID_GENERAL_VACA  BIGINT IDENTITY(1,1) PRIMARY KEY,
+    [Source.Name]     VARCHAR(255) NULL,
+
+    DairyName         VARCHAR(50)  NULL,
+    [today()]         DATE         NULL,
+    HSDate            DATE         NULL,
+
+    [HSAnimalCountTotal.0@1p] FLOAT NULL,
+    [HSAnimalCountMilking.0]  FLOAT NULL,
+    [HSCountAnimElig.0]       FLOAT NULL,
+    [HSInsemCountTotal@1p]    FLOAT NULL,
+    [HSInsemSuccess@1p]       FLOAT NULL,
+    [HSPregRateCycle@1p]      FLOAT NULL,
+    [HSCountPreg@1p.0]        FLOAT NULL,
+    [HSAvgDIMFirstInsem@1p]   FLOAT NULL,
+    [HSAvgDaysOpen@1p]        FLOAT NULL,
+    [HSAvgCalvingInterval]    FLOAT NULL,
+    [HSAvgPeakMilk@1p]        FLOAT NULL,
+    [HSAvgPeakMilkDIM]        FLOAT NULL,
+    [HSAvgDailyMilk]          FLOAT NULL,
+    [HSRollingHerdAvg@1p]     FLOAT NULL,
+    [HSRollingHerdAvg@1]      FLOAT NULL,
+    [HSRollingHerdAvg@2p]     FLOAT NULL,
+    [HSAnimalCountLeft@1P]    FLOAT NULL,
+
+    [Source.FileDate] DATE    NULL,
+    [Source.FileTime] TIME(3) NULL
+  );
+END
+GO
+
+/* =========================
+   4) GENERALES_ESTABLOS
+   ========================= */
+IF OBJECT_ID('dbo.GENERALES_ESTABLOS','U') IS NULL
+BEGIN
+  CREATE TABLE dbo.GENERALES_ESTABLOS (
+    OID_GENERAL_ESTABLO BIGINT IDENTITY(1,1) PRIMARY KEY,
+    [Source.Name]       VARCHAR(255) NULL,
+
+    DairyName           VARCHAR(50)  NULL,
+    [today()]           DATE         NULL,
+    HSDate              DATE         NULL,
+
+    [HSAnimalCountTotal.0@1p] FLOAT NULL,
+    [HSAnimalCountTotal@yf.0] FLOAT NULL,
+    [HSAnimalCountTotal@1p.0] FLOAT NULL,
+    [HSAnimalCountTotal@2.0]  FLOAT NULL,
+    [HSAnimalCountTotal@3p.0] FLOAT NULL,
+    [HSAnimalCountMilking.0]  FLOAT NULL,
+    [HSAnimalCountMilking@1.0] FLOAT NULL,
+    [HSAnimalCountMilking@2.0] FLOAT NULL,
+    [HSAnimalCountMilking@3p.0] FLOAT NULL,
+
+    [HSAvgDIM.0]        FLOAT NULL,
+    [HSAvgDIM.1@1.0]    FLOAT NULL,
+    [HSAvgDIM.1@2.0]    FLOAT NULL,
+    [HSAvgDIM.1@3p.0]   FLOAT NULL,
+    [HSAvgDIMFirstInsem] FLOAT NULL,
+    [HSAvgDaysOpen]      FLOAT NULL,
+    [(HSAvgCalvingInterval/30.5)] FLOAT NULL,
+    [HSAvgCalvingAgeMonths@1] FLOAT NULL,
+    [HSAnimalCountLeft@1P] FLOAT NULL,
+
+    [Source.FileDate] DATE    NULL,
+    [Source.FileTime] TIME(3) NULL
+  );
+END
+GO
+
+/* =========================
+   5) HATO_ACTUAL
+   ========================= */
+IF OBJECT_ID('dbo.HATO_ACTUAL','U') IS NULL
+BEGIN
+  CREATE TABLE dbo.HATO_ACTUAL (
+    OID_HATO_ACTUAL   BIGINT IDENTITY(1,1) PRIMARY KEY,
+    [Source.Name]     VARCHAR(255) NULL,
+
+    DairyName         VARCHAR(50)  NULL,
+    [TODAY()]         DATE         NULL,
+    cow               VARCHAR(50)  NULL,
+    gp                NVARCHAR(50) NULL,
+    lc                INT          NULL,
+    dim               INT          NULL,
+    stat              NVARCHAR(50) NULL,
+    statprod          NVARCHAR(50) NULL,
+    bd                DATE         NULL,
+    typ               NVARCHAR(50) NULL,
+    DYP               NVARCHAR(50) NULL,
+    BIRDAT            DATE         NULL,
+    AGEM              INT          NULL,
+    CLVDAT            DATE         NULL,
+    SrvDat            DATE         NULL,
+    SRVSIRE           NVARCHAR(100) NULL,
+    SrvCount          INT          NULL,
+    SReg              NVARCHAR(50)  NULL,
+    SIRE              NVARCHAR(100) NULL,
+    ASReg1            NVARCHAR(50)  NULL,
+    DAMBN             NVARCHAR(50)  NULL,
+    [DamSire:30]      NVARCHAR(50)  NULL,
+    DamBd             DATE          NULL,
+
+    avmlk             FLOAT        NULL,
+    ACMLK             FLOAT        NULL,
+    [ACMLK[-1]]       FLOAT        NULL,
+    [ACMLK[-2]]       FLOAT        NULL,
+    TestMilk          FLOAT        NULL,
+    [TestMilk[-1]]    FLOAT        NULL,
+    [TestMilk[-2]]    FLOAT        NULL,
+    m200              FLOAT        NULL,
+    m305              FLOAT        NULL,
+    m365              FLOAT        NULL,
+    DryDat            DATE         NULL,
+    RcDry             NVARCHAR(50) NULL,
+    FECHAPARTOFUTURO  DATE         NULL,
+
+    [Source.FileDate] DATE         NULL,
+    [Source.FileTime] TIME(3)      NULL
+  );
+END
+GO
+
+/* =========================
+   6) LACTACIONES
+   ========================= */
+IF OBJECT_ID('dbo.LACTACIONES','U') IS NULL
+BEGIN
+  CREATE TABLE dbo.LACTACIONES (
+    OID_LACTACIONES   BIGINT IDENTITY(1,1) PRIMARY KEY,
+    [Source.Name]     VARCHAR(255) NULL,
+
+    DairyName         VARCHAR(50)  NULL,
+    [FECHA ARCHIVO]   DATE         NULL,
+    COW               VARCHAR(50)  NULL,
+    [STAT ACTUAL]     NVARCHAR(50) NULL,
+    PDCalve           NVARCHAR(50) NULL,
+    LactNo            INT          NULL,
+    LDim              INT          NULL,
+    Calf1             NVARCHAR(50) NULL,
+    Calf2             NVARCHAR(50) NULL,
+    DFC               INT          NULL,
+    FC                DATE         NULL,
+    MC                DATE         NULL,
+    DMC               DATE         NULL,
+    DC                DATE         NULL,
+    LactM             FLOAT        NULL,
+    M100              FLOAT        NULL,
+    M200              FLOAT        NULL,
+    M305              FLOAT        NULL,
+    CalfNum           INT          NULL,
+    Calf2Num          INT          NULL,
+    CalfSex2          NVARCHAR(10) NULL,
+    CalfSex           NVARCHAR(10) NULL,
+    CI                FLOAT        NULL,
+
+    [Source.FileDate] DATE         NULL,
+    [Source.FileTime] TIME(3)      NULL
+  );
+END
+GO
+
+
+
+
+
 
 
 
