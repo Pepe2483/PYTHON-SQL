@@ -1,4 +1,11 @@
 # Crear tablas en Sql sin espacion ni putnos en los nombre
+# CREAR BASE DE DATOS
+IF DB_ID('EVALUACION_ESTABLOS') IS NULL
+BEGIN
+  CREATE DATABASE [EVALUACION_ESTABLOS];
+END
+GO
+
 # 1) PARTOS
 
 USE EVALUACION_ESTABLOS;
@@ -540,6 +547,52 @@ BEGIN
   );
 END
 GO
+
+USE EVALUACION_ESTABLOS;
+GO
+# SERVICIOS
+
+IF OBJECT_ID('dbo.SERVICIOS','U') IS NULL
+BEGIN
+  CREATE TABLE dbo.SERVICIOS (
+    OID_Servicios      INT IDENTITY(1,1) PRIMARY KEY,
+    Source_Name      VARCHAR(80) NULL,
+
+    DairyName          VARCHAR(50)   NULL,
+    FECHA_DE_ARCHIVO   DATE          NULL,
+    COW                BIGINT        NULL,
+    LC_ACTUAL          INT           NULL,
+    DIM_ACTUAL         INT           NULL,
+    STAT_ACTUAL        VARCHAR(20)   NULL,
+    RAZA               VARCHAR(10)   NULL,
+    SEXO               CHAR(1)       NULL,
+    SrvVAIdCod         VARCHAR(20)   NULL,
+    SrvNumLact         INT           NULL,
+    SrvAmount          FLOAT         NULL,
+    SrvCtrlCode        VARCHAR(20)   NULL,
+    SrvCount3Day       INT           NULL,
+    SrvOffC            INT           NULL,
+    SrvCom2            VARCHAR(50)   NULL,
+    SrvCount           INT           NULL,
+    SrvCntLf           INT           NULL,
+    SrvCost            FLOAT         NULL,
+    SrvRevCode         VARCHAR(20)   NULL,
+    SrvDim             INT           NULL,
+    SrvAge             INT           NULL,
+    SrvTech            VARCHAR(20)   NULL,
+    SrvDat             DATE          NULL,
+    SrvTime            TIME(0)       NULL,     -- 0 = sin fracciones de segundo
+    SrvSidEffL2        VARCHAR(20)   NULL,
+    SrvAct2hA          VARCHAR(20)   NULL,
+    SrvDiag            VARCHAR(50)   NULL,
+    SrvSire            VARCHAR(50)   NULL,
+    FECHA_DE_PARTO     DATE          NULL,
+     Source_FileDate DATE         NULL,
+    Source_FileTime TIME(3)      NULL
+  );
+END
+GO
+
 
 
 
