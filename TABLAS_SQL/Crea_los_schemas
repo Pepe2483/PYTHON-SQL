@@ -1,0 +1,26 @@
+# /* ===== 00_bootstrap.sql (CORREGIDO) ===== */
+
+-- Schemas
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name='raw') EXEC('CREATE SCHEMA raw');
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name='stg') EXEC('CREATE SCHEMA stg');
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name='etl') EXEC('CREATE SCHEMA etl');
+
+-- File registry (incremental por archivo)
+IF OBJECT_ID('etl.FileRegistry','U') IS NULL
+BEGIN
+  CREATE TABLE etl.FileRegistry(
+    EventName       nvarchar(50)  NOT NULL,
+    DairyName       nvarchar(100) NOT NULL,
+    SourceName      nvarchar(255) NOT NULL,
+    SourcePath      nvarchar(500) NULL,
+    FileSizeBytes   bigint        NULL,
+    FileHashSha256  char(64)      NULL,
+    SourceMTime     datetime2(3)  NULL,
+    MissingCount    int           NOT NULL CONSTRAINT DF_FileRegistry_MissingCount DEFAULT 0,
+    LastSeenAt      datetime2(3)  NULL,
+    LoadedAt        datetime2(3)  NOT NULL CONSTRAINT DF_FileRegistry_LoadedAt DEFAULT SYSUTCDATETIME(),
+    RowsLoaded      int           NULL,
+    CONSTRAINT PK_FileRegistry PRIMARY KEY (EventName, DairyName, SourceName)
+  );
+END
+GO
